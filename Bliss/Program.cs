@@ -1,13 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-
+using Bliss.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<DbContext>(options =>
+builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

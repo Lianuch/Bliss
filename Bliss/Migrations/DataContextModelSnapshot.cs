@@ -31,9 +31,8 @@ namespace Bliss.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Married")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Married")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -43,12 +42,12 @@ namespace Bliss.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Salary")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.ToTable("people");
+                    b.ToTable("People");
                 });
 #pragma warning restore 612, 618
         }

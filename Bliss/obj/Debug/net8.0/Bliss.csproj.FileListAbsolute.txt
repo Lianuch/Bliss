@@ -136,3 +136,4 @@ D:\c#\Bliss\Bliss\obj\Debug\net8.0\refint\Bliss.dll
 D:\c#\Bliss\Bliss\obj\Debug\net8.0\Bliss.pdb
 D:\c#\Bliss\Bliss\obj\Debug\net8.0\Bliss.genruntimeconfig.cache
 D:\c#\Bliss\Bliss\obj\Debug\net8.0\ref\Bliss.dll
+D:\c#\Bliss\Bliss\obj\Debug\net8.0\Bliss.sourcelink.json
