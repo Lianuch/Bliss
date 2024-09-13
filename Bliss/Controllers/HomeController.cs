@@ -19,43 +19,56 @@ namespace Bliss.Controllers
         public async Task<IActionResult> Index()
         {
             var people = await _context.People.ToListAsync();
-            return View(people);  
-        }
+            return View(people);        }
 
         [HttpPost]
         public async Task<IActionResult> AddPerson(IFormFile csvFile)
         {
             if (csvFile == null || csvFile.Length == 0)
-                return BadRequest();
+                return Json(new{success = false});
 
-            using (var streamReader = new StreamReader(csvFile.OpenReadStream()))
+            using (var reader = new StreamReader(csvFile.OpenReadStream()))
             {
+                var line = string.Empty;
                 var people = new List<Person>();
-                while (streamReader.EndOfStream)
+
+                while ((line = await reader.ReadLineAsync()) != null)
                 {
-                    var line = await streamReader.ReadLineAsync();
-                    var val = line.Split(',');
-
-                    var person = new Person()
+                    var values = line.Split(',');
+                    if (values.Length == 5)
                     {
-                        Name = val[0],
-                        DateOfBirth = DateTime.Parse(val[1]),
-                        Married = bool.Parse(val[2]),
-                        Phone = val[3],
-                        Salary = double.Parse(val[4])
-
-                    };
-                    people.Add(person);
+                        var person = new Person
+                        {
+                            Name = values[0],
+                            DateOfBirth = DateTime.Parse(values[1]),
+                            Married = bool.Parse(values[2]),
+                            Phone = values[3],
+                            Salary = double.Parse(values[4])
+                        };
+                        people.Add(person);
+                    }
                 }
-            _context.People.AddRange(people);
-            await _context.SaveChangesAsync();
+
+                _context.People.AddRange(people);
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToAction("Index");
-
         }
 
-        [HttpDelete("{id}")]
+        [HttpPost]
+        public async Task<IActionResult> Edit(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Update(person);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+
+            return Json(new { success = false });
+        }
+        [HttpDelete("Home/Delete{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var pers = await _context.People.FindAsync(id);
@@ -63,7 +76,7 @@ namespace Bliss.Controllers
                 return NotFound();
             _context.People.Remove(pers);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return NoContent();
         }
         public IActionResult Privacy()
         {

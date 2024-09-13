@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bliss")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e1f1aeb31070467f88b9a9df1e5eae5bf5e1bc7b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82dff1f8657d201f4716e59618da82e52acf0579")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bliss")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bliss")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
